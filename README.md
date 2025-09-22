@@ -13,7 +13,7 @@ Schedulio is a project designed to implement and simulate various CPU scheduling
     - [Highest Response Ratio Next (HRRN)](#highest-response-ratio-next-hrrn)
     - [Feedback (FB)](#feedback-fb)
     - [Feedback with varying time quantum (FBV)](#feedback-with-varying-time-quantum-fbv)
-    - [Aging](#aging)
+    
   - [Installation](#installation)
   - [Input Format](#input-format)
   - [Contributors](#contributors)
@@ -75,19 +75,6 @@ In summary, Feedback is a scheduling algorithm that allocates CPU time based on 
 ### Feedback with varying time quantum (FBV)
 
 Same as [Feedback](#feedback-fb) but with varying time quantum. Feedback with varying time quantum also uses multiple priority queues and assigns a different time quantum for each priority level, it allows the algorithm to be more efficient by spending more time on higher-priority processes and less time on lower-priority processes.
-
-### Aging
-
-Xinu is an operating system developed at Purdue University. The scheduling invariant in Xinu assumes that at any time, the highest priority process eligible for CPU service is executing, with round-robin scheduling for processes of equal priority. Under this scheduling policy, the processes with the highest priority will always be executing. As a result, all the processes with lower priority will never get CPU time. As a result, starvation is produced in Xinu when we have two or more processes eligible for execution that have different priorities. For ease of discussion, we call the set of processes in the ready list and the current process as the eligible processes.
-
-To overcome starvation, an aging scheduler may be used. On each rescheduling operation, a timeout for instance, the scheduler increases the priority of all the ready processes by a constant number. This avoids starvation as each ready process can be passed over by the scheduler only a finite number of times before it has the highest priority.
-
-Each process has an initial priority that is assigned to it at process creation. Every time the scheduler is called it takes the following steps:
-- The priority of the current process is set to the initial priority assigned to it.
-- The priorities of all the ready processes (not the current process) are incremented by 1.
-- The scheduler chooses the highest priority process from among all the eligible processes.
-
-Note that during each call to the scheduler, the complete ready list has to be traversed.
 
 ## Installation
 
@@ -165,7 +152,7 @@ make
   5. **HRRN** (Highest Response Ratio Next)
   6. **FB-1** (Feedback where all queues have q=1)
   7. **FB-2i** (Feedback where q=2i)
-  8. **Aging** - requires quantum parameter (e.g., 8-1 means Aging with q=1)
+
 
 - **Line 3:** An integer specifying the last instant to be used in your simulation and to be shown on the timeline.
 - **Line 4:** An integer specifying the number of processes to be simulated.
